@@ -1,9 +1,10 @@
 import type { SvelteComponent } from 'svelte';
+import { RubberbandEllipse } from './ellipse';
 import { RubberbandRectangle } from './rectangle';
 import { RubberbandPolygon } from './polygon';
 import type { DrawingMode } from '../../AnnotoriousOpts';
 
-export type DrawingTool = 'rectangle' | 'polygon' | string;
+export type DrawingTool = 'ellipse' | 'rectangle' | 'polygon' | string;
 
 export type DrawingToolOpts = {
 
@@ -15,8 +16,9 @@ export type DrawingToolOpts = {
 
 // @ts-ignore
 const REGISTERED = new Map<DrawingTool, { tool: typeof SvelteComponent, opts?: DrawingToolOpts }>([
+  ['ellipse', { tool: RubberbandEllipse }],
   ['rectangle', { tool: RubberbandRectangle }],
-  ['polygon', { tool: RubberbandPolygon }]
+  ['polygon', { tool: RubberbandPolygon }],
 ]);
 
 export const listDrawingTools = () => [...REGISTERED.keys()];
